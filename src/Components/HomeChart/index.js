@@ -27,8 +27,10 @@ const legend = {
 };
 
 const data = (canvas) => {
-  const ctx = canvas.getContext("2d")
-  const gradient = ctx.createLinearGradient(0,0,100,0);
+  const ctx = canvas.getContext("2d");
+  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, 'rgba(250,174,50,1)');   
+  gradient.addColorStop(1, 'rgba(250,174,50,0.2)');
   
   return {
     backgroundColor: gradient,
@@ -37,8 +39,10 @@ const data = (canvas) => {
       {
         label: 'My First dataset',
         fill: true,
+        // fillColor: gradient,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
+        // backgroundColor: 'rgba(75,192,192,0.4)',
+        backgroundColor: gradient,
         borderColor: 'rgba(75,192,192,1)',
         borderCapStyle: 'butt',
         borderDash: [],
