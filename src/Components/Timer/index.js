@@ -32,44 +32,49 @@ const useStyles = makeStyles({
 const Timer = (props) => {
   const [mins, setMins] = useState("25");
   const [secs, setSecs] = useState("00");
-  const [stopTime, setStopTime] = useState(new Date().getTime() + 25 * 60000)
+  const [stopTime, setStopTime] = useState();
+  const [timeLeft, setTimeLeft] = useState();
+  const [timer, setTimer] = useState();
   
   useEffect(() => {
+    if (!stopTime) return;
+
     const timer = setInterval(() => {
       const time = {};
       const difference = stopTime - new Date().getTime();
+      if (difference <= 0) return;
       time['minutes'] =  Math.floor((difference / 1000 / 60) % 60);
       time['seconds'] = Math.floor((difference / 1000) % 60);
 
       setMins(time.minutes);
       setSecs(time.seconds);
     }, 1000);
-  });
 
-  const calculateTimeLeft = () => {
-    let year = new Date().getTime();
-    let difference = (new Date().getTime() + 25 * 60000) - new Date().getTime();
-    let timeLeft = {};
-  
-    if (difference > 0) {
-      timeLeft = {
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      };
-    }
-  
-    return timeLeft;
-  }
+    setTimer(timer);
+    return () => clearInterval(timer);
+  }, [stopTime]);
 
   const handleStartClick = () => {
+    // If there was time left when timer got stopped, restart timer with remaining time.
+    if (timeLeft) {
+      setStopTime(new Date().getTime() + timeLeft);
+      return;
+    }
+
+    // Start timer all over again
+    setStopTime(new Date().getTime() + 25 * 60000);
   }
   
   const handleStopClick = () => {
+    clearInterval(timer);
+    const timeLeft = stopTime - new Date().getTime();
+    setTimeLeft(timeLeft);
   }
 
   const handleResetClick = () => {
-    // clearTimeout(timer);
-    setMins(25);
+    clearInterval(timer);
+    setTimeLeft(0);
+    setMins("25");
     setSecs("00");
   }
 
