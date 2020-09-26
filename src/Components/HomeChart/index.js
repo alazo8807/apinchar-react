@@ -29,7 +29,7 @@ const legend = {
 const data = (canvas) => {
   const ctx = canvas.getContext("2d");
   var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, 'rgba(250,174,50,1)');   
+  gradient.addColorStop(0, 'rgba(250,174,50,0.9)');   
   gradient.addColorStop(1, 'rgba(250,174,50,0.2)');
   
   return {
@@ -43,7 +43,7 @@ const data = (canvas) => {
         lineTension: 0.1,
         // backgroundColor: 'rgba(75,192,192,0.4)',
         backgroundColor: gradient,
-        borderColor: 'rgba(75,192,192,1)',
+        borderColor: 'rgba(250,174,50)',
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
@@ -71,7 +71,6 @@ class HomeChart extends Component {
   render() {
     return (
       <div>
-        <h2>Line Example</h2>
         <Line data={data} options={options} legend={legend}/>
       </div>
     );
