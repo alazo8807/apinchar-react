@@ -57,7 +57,7 @@ const data = (canvas) => {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [10, 0, 0, 25, 150, 0, 0],
       }
     ]
   }

@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -26,8 +26,6 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
 });
-
-
 
 const Timer = (props) => {
   const [mins, setMins] = useState("25");
